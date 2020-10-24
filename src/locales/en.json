@@ -1,0 +1,25 @@
+{
+  "summaryTitle": "Summary",
+  "packtLabel": "pack(s)",
+  "nameLabel": "Name",
+  "addressStreetLabel": "Street and Number",
+  "addressPostcodeLabel": "Postcode",
+  "emailLabel": "Email",
+  "phoneNumberLabel": "Phone number",
+  "submitButtonLabel": "Submit order",
+  "totalCostLabel": "Total cost: ${price}",
+  "summaryFirstLineMessage": "Dear {name}, this is your order:",
+  "summarySecondLineMessage":
+    "To be deliver to the following address: {addressStreet}, {addressPostcode}",
+  "summaryThirdLineMessage":
+    "The delivery day and time will be confirm through the number: {number}",
+  "confirmButtonLabel": "Confirm",
+  "cancelButtonLabel": "Cancel",
+  "errorNameRequired": "Name is required",
+  "errorAddressRequired": "Street is required",
+  "errorPostcodeRequired": "Postal code is required",
+  "errorEmailRequired": "Email is required",
+  "errorEmailInvalid": "E-mail must be valid",
+  "errorPhoneRequired": "Phone number is required",
+  "errorPhoneInvalid": "Phone number must be valid"
+}
