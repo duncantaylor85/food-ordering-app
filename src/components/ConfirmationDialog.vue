@@ -88,7 +88,13 @@ export default Vue.extend({
     },
     async sendFoodOrder() {
       this.loading = true;
+      const bodyJson = {
+          order: this.summary,
+          customer: this.customer,
+          locale: process.env.VUE_APP_I18N_LOCALE,
+      }
       try {
+        
         let response = await fetch(
           "https://northamerica-northeast1-baby-alert-app.cloudfunctions.net/send-email",
           {
@@ -96,7 +102,7 @@ export default Vue.extend({
             mode: "cors",
             cache: "no-cache",
             credentials: "omit",
-            body: JSON.stringify(this.summary),
+            body: JSON.stringify(bodyJson),
           }
         );
         if (response.ok) {
