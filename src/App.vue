@@ -6,6 +6,7 @@
       <v-app-bar app color="#f5bb00">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>A la Paila</v-toolbar-title>
+        <v-spacer></v-spacer>
         <LocaleChanger />
       </v-app-bar>
 

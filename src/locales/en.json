@@ -21,5 +21,8 @@
   "errorEmailRequired": "Email is required",
   "errorEmailInvalid": "E-mail must be valid",
   "errorPhoneRequired": "Phone number is required",
-  "errorPhoneInvalid": "Phone number must be valid"
+  "errorPhoneInvalid": "Phone number must be valid",
+  "transactionTitle": "A la Paila",
+  "transactionSuccess": "Your order has been placed",
+  "transactionError": "Sorry! An error has ocurred. Please contact us: 12345"
 }

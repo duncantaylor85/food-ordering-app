@@ -13,7 +13,7 @@
           >
         </v-card-actions>
       </div>
-      <CustomerForm :customer="customer" />
+      <CustomerForm :customer.sync="customer" :isFormValid.sync="isFormValid" :bus="bus"/> 
       <p class="text-h5 mt-2 pl-4">{{ $t("totalCostLabel", {price: price}) }}</p>
       <v-card-actions>
         <v-btn
@@ -73,17 +73,26 @@ export default Vue.extend({
         filling.counter++;
       }
     },
-    openConfirmation() {
-      this.confirmData.dialog = true;
-      this.confirmData.summary = this.fillings.filter((x) => x.counter != 0);
+     resetForm(){
+      this.fillings.forEach((filling) => filling.counter = 0);
+      this.bus.$emit('reset');
     },
-    closeDialog() {
+    openConfirmation() {
+        this.bus.$emit('checkFormValid');
+        if (this.isFormValid) {
+          this.confirmData.dialog = true;
+          this.confirmData.summary = this.fillings.filter((x) => x.counter != 0);
+        }      
+    },
+    closeDialog(success) {
       this.confirmData.dialog = false;
+      if (success) this.resetForm();
     },
   },
   data() {
     return {
-      
+      bus: new Vue(),
+      isFormValid: false,
       customer: {
         name: "",
         email: "",
@@ -92,6 +101,7 @@ export default Vue.extend({
           street_number: "",
           postcode: "",
         },
+        
       },
       fillings: [
         {
