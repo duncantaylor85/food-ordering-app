@@ -22,8 +22,9 @@
   "errorEmailRequired": "Correo electrónico es obligatorio",
   "errorEmailInvalid": "El correo electrónico debe ser válido",
   "errorPhoneRequired": "Teléfono es obligatorio",
-  "errorPhoneInvalid": "El Teléfono debe ser válido",
+  "errorPhoneInvalid": "El teléfono debe ser válido",
   "transactionTitle": "A la Paila",
   "transactionSuccess": "Tu pedido ha sido recibido",
-  "transactionError": "Lo siento! Ha ocurrido un error. Por favor contáctanos al: 12345"
+  "transactionError": "Lo siento! Ha ocurrido un error. Por favor contáctanos al: 12345",
+  "closeButtonLabel": "Cerrar"
 }

@@ -45,8 +45,8 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" text @click="closeDialog" >
-          {{ $t("cancelButtonLabel") }}
+        <v-btn color="primary" text @click="closeFeedbackDialog" >
+          {{ $t("closeButtonLabel") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -77,6 +77,10 @@ export default Vue.extend({
       this.loading = false;
       this.$emit("close-dialog", this.success);
     },
+    closeFeedbackDialog() {
+      this.confirmation = true;
+      this.$emit("close-dialog", this.success);
+    },
     onSuccess(){
       this.loading = false;
       this.confirmation = false;
@@ -91,7 +95,7 @@ export default Vue.extend({
       const bodyJson = {
           order: this.summary,
           customer: this.customer,
-          locale: process.env.VUE_APP_I18N_LOCALE,
+          locale: this.$i18n.locale,
       }
       try {
         

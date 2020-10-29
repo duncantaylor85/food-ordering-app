@@ -46,7 +46,7 @@ export default Vue.extend({
   props: ['customer','isFormValid', 'bus'],
   mounted() {
     this.bus.$on('checkFormValid', () => {
-      this.$refs.form.validate()
+      this.$refs.form.validate();
       this.$emit('update:isFormValid', this.valid);
     });
     this.bus.$on('reset', () => this.$refs.form.reset());

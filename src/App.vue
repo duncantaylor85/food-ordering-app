@@ -36,7 +36,7 @@ export default Vue.extend({
     components: { LocaleChanger },
   data() {
     return {
-      langs: ['en','es'],
+      langs: ['en','es', 'fr'],
       drawer: false,
     };
   },

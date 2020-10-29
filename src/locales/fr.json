@@ -1,0 +1,30 @@
+{
+    "summaryTitle": "Résumé",
+    "packtLabel": "Numéro d'emballage",
+    "nameLabel": "Nom complet",
+    "addressStreetLabel": "Numéro civique et nom de la rue (numéro d'appartement)",
+    "addressPostcodeLabel": "Code Postal",
+    "emailLabel": "Adresse électronique",
+    "phoneNumberLabel": "Numéro de téléphone",
+    "submitButtonLabel": "Soumettre la commande",
+    "totalCostLabel": "Total à payer: ${price}",
+    "summaryFirstLineMessage":
+      "Cher / Chère {name}, voici le récapitulatif de votre commande:",
+    "summarySecondLineMessage":
+      "La livraison sera effectuée à l'adresse suivante: {addressStreet}, {addressPostcode}",
+    "summaryThirdLineMessage":
+      "Le jour et l'heure de la livraison seront confirmés au numéro suivant: {number}",
+    "confirmButtonLabel": "Confirmer",
+    "cancelButtonLabel": "Annuler",
+    "errorNameRequired": "Le nom complet est requis",
+    "errorAddressRequired": "Le numéro civique et le nom de la rue sont requis",
+    "errorPostcodeRequired": "Le code postal est requis",
+    "errorEmailRequired": "Une adresse électronique est requise",
+    "errorEmailInvalid": "L'adresse électronique doit être valide",
+    "errorPhoneRequired": "Le numéro de téléphone est requis",
+    "errorPhoneInvalid": "Le numéro de téléphone doit être valide",
+    "transactionTitle": "A la Paila",
+    "transactionSuccess": "Votre commande a été reçue",
+    "transactionError": "Désolé! Une erreur s'est produite. Veuillez nous contacter au: 12345",
+    "closeButtonLabel": "Fermer"
+  }
