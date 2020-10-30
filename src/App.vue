@@ -44,6 +44,14 @@ export default Vue.extend({
     theme(){
       return 'light'
     }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+      document.title = to.meta.title || "A la Paila"
+    }
+    }
   }
 });
 </script>
