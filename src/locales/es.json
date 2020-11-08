@@ -23,8 +23,15 @@
   "errorEmailInvalid": "El correo electrónico debe ser válido",
   "errorPhoneRequired": "Teléfono es obligatorio",
   "errorPhoneInvalid": "El teléfono debe ser válido",
-  "transactionTitle": "A la Paila",
+  "commonAppTitle": "A la Paila",
+  "commonAppSubtitle": "La Paila e' Cucha",
   "transactionSuccess": "Tu pedido ha sido recibido",
   "transactionError": "Lo siento! Ha ocurrido un error. Por favor contáctanos al: 12345",
-  "closeButtonLabel": "Cerrar"
+  "closeButtonLabel": "Cerrar",
+  "homeTitle": "Entrega de comida a domicilio", 
+  "homeDescription": "Preparamos platos venezolanos y te los llevamos a la puerta de tu casa!",
+  "homeDescription2": "Disfruta de nuevo del sabor de Venezuela",
+  "orderNowTitle": "Ordena ahora!",
+  "aboutUsTitle": "De Guacurebo pa' Montreal! ",
+  "aboutUsDescription": "Tanto se extrañan los sabores del terruño, que uno termina llevándolos a todo el mundo."
 }

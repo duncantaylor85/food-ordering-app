@@ -35,7 +35,7 @@
     </v-card>
     <v-card v-else>
       <v-card-title>
-        {{ $t("transactionTitle") }}
+        {{ $t("commonAppTitle") }}
       </v-card-title>
       <v-card-text v-if="success">
         {{ $t("transactionSuccess") }}

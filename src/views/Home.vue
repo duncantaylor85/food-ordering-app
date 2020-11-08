@@ -1,6 +1,27 @@
 <template>
   <div class="home">
-    <v-card class="mx-auto mt-2" max-width="600" color="#FBE08A">
+     <v-card id="home" class="mx-auto mt-2" max-width="600" height="500" color="#B3E5FC">
+      <v-card-text class="pb-4">
+        <v-img
+        height="250"
+        contain
+        src="@/assets/paila.png"
+        ></v-img>
+      </v-card-text>   
+      <v-card-text>
+        <v-divider class="mx-4"></v-divider>
+        <div class="my-4 subtitle-1">
+          {{$t("homeTitle")}}
+        </div>
+        <div>{{$t("homeDescription")}}
+         <br> 
+         <br>
+         {{$t("homeDescription2")}}  
+        </div>
+      </v-card-text>
+    </v-card>
+    <v-card id="order-now" class="mx-auto mt-2" max-width="600" color="#B3E5FC">
+      <v-card-title> {{$t("orderNowTitle")}} </v-card-title>
       <div class="d-flex" v-for="(filling, index) in fillings" :key="index">
         <v-card-text>{{ filling.name }}</v-card-text>
         <v-card-text>{{ filling.counter }} {{ $t("packtLabel") }}</v-card-text>
@@ -18,12 +39,28 @@
       <v-card-actions>
         <v-btn
           class="mx-auto mb-6"
-          color="success"
+          color="primary"
           :disabled="isDisabled"
           @click.prevent="openConfirmation()"
           >{{ $t("submitButtonLabel") }}</v-btn
         >
       </v-card-actions>
+    </v-card>
+     <v-card id="about-us" class="mx-auto mt-2" max-width="600" height="400" color="#B3E5FC"> 
+       <v-card-text>
+        <br/>
+        {{$t("aboutUsTitle")}}
+        <br/>
+        <br/>
+        {{$t("aboutUsDescription")}}
+       </v-card-text>
+       <v-card-text class="pb-4">
+        <v-img
+        height="250"
+        contain
+        src="@/assets/cerro.png"
+        ></v-img>
+      </v-card-text>   
     </v-card>
     <ConfirmationDialog
       :dialog="confirmData.dialog"
