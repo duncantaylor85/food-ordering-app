@@ -25,7 +25,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="closeDialog" :disabled="loading">
+        <v-btn color="blue darken-1" text @click="closeDialog" :disabled="loading">
           {{ $t("cancelButtonLabel") }}
         </v-btn>
         <v-btn color="primary" text @click="sendFoodOrder" :loading="loading">

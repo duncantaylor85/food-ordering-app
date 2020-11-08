@@ -1,9 +1,20 @@
 <template>
     <div id="login">
-        <h1>Login</h1>
-        <input type="text" name="username" v-model="input.username" placeholder="Username" />
-        <input type="password" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
+        <br>
+        <h2>{{$t('loginLabel')}}</h2>
+        <br>
+         <v-text-field
+            type="text"
+            :label="$t('usernameLabel')"
+            v-model="input.username" 
+          ></v-text-field>
+          <v-text-field
+            type="text"
+            :label="$t('passwordLabel')"
+            v-model="input.password" 
+          ></v-text-field>
+          <br>
+        <v-btn color="primary" v-on:click="login()">{{$t('loginLabel')}}</v-btn>
     </div>
 </template>
 
@@ -21,7 +32,7 @@
         methods: {
             login() {
                 if(this.input.username != "" && this.input.password != "") {
-                    if(this.input.username == this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
+                    if(this.input.username == 'natalya' && this.input.password == 'natalya123') {
                         this.$emit("authenticated", true);
                         this.$router.replace({ name: "secure" });
                     } else {

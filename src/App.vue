@@ -26,7 +26,7 @@
             :key="item.title"
             link
             v-scroll-to="item.scrollto"
-            @click.stop="drawer = !drawer"
+            @click.stop="onMenuItemClick(item.scrollto)"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -36,6 +36,21 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <br>
+          <v-divider></v-divider>
+
+          <!-- TODO change this to logout if authenticated == true -->
+          <v-list-item 
+            link
+            @click="onMenuItemClick('login')"
+          > 
+            <v-list-item-icon>
+              <v-icon>mdi-chef-hat</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Login</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item> 
         </v-list>
       </v-navigation-drawer>
 
@@ -43,6 +58,7 @@
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>{{$t("commonAppTitle")}}</v-toolbar-title>
         <v-spacer></v-spacer>
+         <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
         <LocaleChanger />
       </v-app-bar>
 
@@ -51,8 +67,7 @@
         <!-- Provides the application the proper gutter -->
         <v-container fluid>
           <!-- If using vue-router -->
-          <router-view></router-view>
-         <!-- <router-view @authenticated="setAuthenticated"></router-view>-->
+         <router-view @authenticated="setAuthenticated" />
         </v-container>
       </v-main>
 
@@ -66,7 +81,7 @@
 <script>
 import Vue from "vue";
 import LocaleChanger from "./components/LocaleChanger.vue";
-
+import VueScrollTo  from 'vue-scrollto';
 
 export default Vue.extend({
   name: "App",
@@ -79,13 +94,8 @@ export default Vue.extend({
         { title: 'Home', icon: 'mdi-home', scrollto: "#home" },
         { title: 'Order now!', icon: 'mdi-truck-fast', scrollto:"#order-now"},
         { title: 'About us', icon: 'mdi-pot-steam', scrollto:"#about-us" },
-        { title: 'Login', icon: 'mdi-chef-hat', scrollto:"" },
-     ],
+      ],
       authenticated: false,
-      mockAccount: {
-          username: "nraboy",
-          password: "password"
-      }
     };
   },
   computed:{
@@ -99,6 +109,17 @@ export default Vue.extend({
       },
       logout() {
           this.authenticated = false;
+      },
+      onMenuItemClick(menu){
+        if (menu == 'login'){
+          this.$router.push(menu).catch(()=>{});
+        }
+        if (menu != 'login' && this.$router.currentRoute.name =='login') {
+          this.$router.go(-1);
+          // TODO: scroll to clicked item
+        }
+          
+        this.drawer= !this.drawer;
       }
   },
   watch: {
