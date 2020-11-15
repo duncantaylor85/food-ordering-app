@@ -3,7 +3,7 @@
         <br>
         <v-card id="login" class="mx-auto mt-2" max-width="600" height="300" color="#FFECC8">
             <v-card-title> {{$t('loginLabel')}} </v-card-title>
-            <v-form>
+            <v-form  @keyup.native.enter="login()">
                 <v-card-text>
                     <v-text-field 
                         type="text"
@@ -24,7 +24,7 @@
                 <v-btn
                     text
                     color="primary"
-                    v-on:click="login()"
+                    @click="login()"
                 >
                     {{$t('loginLabel')}}
                 </v-btn>
