@@ -2,7 +2,7 @@
   <div>
     <v-app :style="{background: $vuetify.theme.themes[theme].background}">
       <v-navigation-drawer app v-model="drawer"
-      class="light-blue lighten-2"
+        color="#FFAC00"
       >
         <v-list-item>
           <v-list-item-content>
@@ -54,7 +54,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app color="#4FC3F7">
+      <v-app-bar app color="#FFAC00">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>{{$t("commonAppTitle")}}</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -70,10 +70,6 @@
          <router-view @authenticated="setAuthenticated" />
         </v-container>
       </v-main>
-
-      <v-footer app>
-        <!-- -->
-      </v-footer>
     </v-app>
   </div>
 </template>
@@ -105,6 +101,7 @@ export default Vue.extend({
   },
   methods: {
       setAuthenticated(status) {
+        console.log("autheticated", status);
           this.authenticated = status;
       },
       logout() {
@@ -115,7 +112,8 @@ export default Vue.extend({
           this.$router.push(menu).catch(()=>{});
         }
         if (menu != 'login' && this.$router.currentRoute.name =='login') {
-          this.$router.go(-1);
+          console.log("onMenuItemClik", menu);
+          this.$router.push("/"+menu).catch(()=>{});
           // TODO: scroll to clicked item
         }
           

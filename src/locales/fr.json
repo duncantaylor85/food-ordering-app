@@ -36,5 +36,6 @@
     "aboutUsDescription": "Tanto se extrañan los sabores del terruño, que uno termina llevándolos a todo el mundo.",
     "usernameLabel": "Username",
     "passwordLabel": "Password",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "adminPageTitle": "A la Paila Administrador"
   }

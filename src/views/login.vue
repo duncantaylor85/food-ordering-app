@@ -1,20 +1,28 @@
 <template>
     <div id="login">
         <br>
-        <h2>{{$t('loginLabel')}}</h2>
-        <br>
-         <v-text-field
-            type="text"
-            :label="$t('usernameLabel')"
-            v-model="input.username" 
-          ></v-text-field>
-          <v-text-field
-            type="text"
-            :label="$t('passwordLabel')"
-            v-model="input.password" 
-          ></v-text-field>
-          <br>
-        <v-btn color="primary" v-on:click="login()">{{$t('loginLabel')}}</v-btn>
+        <v-card id="login" class="mx-auto mt-2" max-width="600" height="500" color="#FFECC8">
+            <v-card-title> {{$t('loginLabel')}} </v-card-title>
+            <v-form>
+                <v-card-text>
+                    <v-text-field 
+                        type="text"
+                        :label="$t('usernameLabel')"
+                        v-model="input.username" 
+                    ></v-text-field>
+                    <v-text-field
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="show ? 'text' : 'password'"
+                        name="input-10-2"
+                        :label="$t('passwordLabel')"
+                        class="input-group--focused"
+                        @click:append="show = !show"
+                        v-model="input.password" 
+                    ></v-text-field>
+                </v-card-text>
+            </v-form>
+            <v-btn color="primary" v-on:click="login()">{{$t('loginLabel')}}</v-btn>
+        </v-card>
     </div>
 </template>
 
@@ -26,7 +34,8 @@
                 input: {
                     username: "",
                     password: ""
-                }
+                },
+                show: false
             }
         },
         methods: {
