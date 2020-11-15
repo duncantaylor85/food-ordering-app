@@ -38,5 +38,8 @@
   "passwordLabel": "Contraseña",
   "loginLabel": "Iniciar sesión",
   "adminPageTitle": "A la Paila Administrador",
-  "adminMenuLabel": "Admin"
+  "adminMenuLabel": "Admin",
+  "homeMenuLabel": "Home",
+  "orderNowMenuLabel": "Realizar pedido",
+  "aboutUsMenuLabel": "Sobre nosotros"
 }

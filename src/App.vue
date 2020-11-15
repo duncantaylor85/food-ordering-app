@@ -33,7 +33,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>{{$t(item.label) }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <br>
@@ -98,9 +98,9 @@ export default Vue.extend({
       langs: ['en','es', 'fr'],
       drawer: false,
       items: [
-        { title: 'Home', icon: 'mdi-home', scrollto: "#home" },
-        { title: 'Order now!', icon: 'mdi-truck-fast', scrollto:"#order-now"},
-        { title: 'About us', icon: 'mdi-pot-steam', scrollto:"#about-us" },
+        { title: 'Home', icon: 'mdi-home', scrollto: "#home", label:'homeMenuLabel' },
+        { title: 'Order now!', icon: 'mdi-truck-fast', scrollto:"#order-now", label: 'orderNowMenuLabel'},
+        { title: 'About us', icon: 'mdi-pot-steam', scrollto:"#about-us", label: 'aboutUsMenuLabel'},
       ],
       authenticated: false,
     };

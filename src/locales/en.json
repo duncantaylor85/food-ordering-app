@@ -37,5 +37,8 @@
   "passwordLabel": "Password",
   "loginLabel": "Login",
   "adminPageTitle": "A la Paila Admin Site",
-  "adminMenuLabel": "Admin"
+  "adminMenuLabel": "Admin",
+  "homeMenuLabel": "Home",
+  "orderNowMenuLabel": "Order now!",
+  "aboutUsMenuLabel": "About us"
 }
