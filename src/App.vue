@@ -37,10 +37,9 @@
             </v-list-item-content>
           </v-list-item>
           <br>
-          <v-divider></v-divider>
-
-          <!-- TODO change this to logout if authenticated == true -->
+          <v-divider></v-divider>          
           <v-list-item 
+            v-if="!authenticated"
             link
             @click="onMenuItemClick('login')"
           > 
@@ -49,6 +48,18 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>Login</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item> 
+          <v-list-item 
+            v-else
+            link
+            @click="onMenuItemClick('secure')"
+          > 
+            <v-list-item-icon>
+              <v-icon>mdi-chef-hat</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{$t("adminMenuLabel")}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item> 
         </v-list>
@@ -101,7 +112,7 @@ export default Vue.extend({
   },
   methods: {
       setAuthenticated(status) {
-        console.log("autheticated", status);
+        console.log("authenticated", status);
           this.authenticated = status;
       },
       logout() {
@@ -111,10 +122,9 @@ export default Vue.extend({
         if (menu == 'login'){
           this.$router.push(menu).catch(()=>{});
         }
-        if (menu != 'login' && this.$router.currentRoute.name =='login') {
+        if (menu != 'login') {
           console.log("onMenuItemClik", menu);
           this.$router.push("/"+menu).catch(()=>{});
-          // TODO: scroll to clicked item
         }
           
         this.drawer= !this.drawer;

@@ -36,5 +36,6 @@
   "usernameLabel": "Username",
   "passwordLabel": "Password",
   "loginLabel": "Login",
-  "adminPageTitle": "A la Paila Admin Site"
+  "adminPageTitle": "A la Paila Admin Site",
+  "adminMenuLabel": "Admin"
 }

@@ -1,7 +1,7 @@
 <template>
     <div id="login">
         <br>
-        <v-card id="login" class="mx-auto mt-2" max-width="600" height="500" color="#FFECC8">
+        <v-card id="login" class="mx-auto mt-2" max-width="600" height="300" color="#FFECC8">
             <v-card-title> {{$t('loginLabel')}} </v-card-title>
             <v-form>
                 <v-card-text>
@@ -20,8 +20,16 @@
                         v-model="input.password" 
                     ></v-text-field>
                 </v-card-text>
+                <v-card-actions class="pt-0">
+                <v-btn
+                    text
+                    color="primary"
+                    v-on:click="login()"
+                >
+                    {{$t('loginLabel')}}
+                </v-btn>
+                </v-card-actions>
             </v-form>
-            <v-btn color="primary" v-on:click="login()">{{$t('loginLabel')}}</v-btn>
         </v-card>
     </div>
 </template>

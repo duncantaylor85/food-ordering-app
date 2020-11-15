@@ -37,5 +37,6 @@
   "usernameLabel": "Usuario",
   "passwordLabel": "Contraseña",
   "loginLabel": "Iniciar sesión",
-  "adminPageTitle": "A la Paila Administrador"
+  "adminPageTitle": "A la Paila Administrador",
+  "adminMenuLabel": "Admin"
 }
