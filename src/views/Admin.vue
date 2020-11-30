@@ -244,9 +244,8 @@ export default {
         const tempProducts = [];
         const tempSubproducts = [];
         snapshot.forEach((doc) => {
-            tempProducts.push(doc.id);
-            tempSubproducts.push(doc.data());
-          
+          tempProducts.push(doc.id);
+          tempSubproducts.push(doc.data());
         });
         this.products = tempProducts;
         this.subproducts = tempSubproducts;
