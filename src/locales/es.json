@@ -41,5 +41,14 @@
   "adminMenuLabel": "Admin",
   "homeMenuLabel": "Home",
   "orderNowMenuLabel": "Realizar pedido",
-  "aboutUsMenuLabel": "Sobre nosotros"
+  "aboutUsMenuLabel": "Sobre nosotros",
+  "productsListTitle": "Lista de productos disponibles",
+  "addProductTitle": "Nuevo producto",
+  "addProductMessage": "Agrega el nombre del nuevo producto a ofrecer",
+  "productLabel": "Producto",
+  "deleteProductTitle": "Borrar producto",
+  "deleteProductMessage": "Estas seguro que quieres borrar este producto?",
+  "addSubproductTitle": "Agregar subproducto",
+  "addSubproductMessage": "Nombre de subproducto",
+  "subproductLabel": "Subproducto"
 }

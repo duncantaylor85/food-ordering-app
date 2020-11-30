@@ -1,7 +1,7 @@
 <template>
     <div id="login">
         <br>
-        <v-card id="login" class="mx-auto mt-2" max-width="600" height="300" color="#FFECC8">
+        <v-card id="login" class="mx-auto mt-2" max-width="600" height="300" color="#FFFFFF">
             <v-card-title> {{$t('loginLabel')}} </v-card-title>
             <v-form  @keyup.native.enter="login()">
                 <v-card-text>
@@ -51,7 +51,7 @@
                 if(this.input.username != "" && this.input.password != "") {
                     if(this.input.username == 'natalya' && this.input.password == 'natalya123') {
                         this.$emit("authenticated", true);
-                        this.$router.replace({ name: "secure" });
+                        this.$router.replace({ name: "admin" });
                     } else {
                         console.log("The username and / or password is incorrect");
                     }

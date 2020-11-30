@@ -4,9 +4,8 @@ import router from './router'
 import vuetify from './plugins/vuetify';
 import { i18n }  from './plugins/i18n';
 import VueScrollTo from 'vue-scrollto';
-import { firestorePlugin } from 'vuefire';
 
-Vue.use(firestorePlugin);
+
 
 Vue.config.productionTip = false
 

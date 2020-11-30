@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginComponent from "../views/Login.vue"
-import SecureComponent from "../views/Secure.vue"
+import AdminComponent from "../views/Admin.vue"
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -18,9 +18,9 @@ const routes = [
     component: LoginComponent
   },
   {
-    path: "/secure",
-    name: "secure",
-    component: SecureComponent
+    path: "/admin",
+    name: "admin",
+    component: AdminComponent
   }
 ]
 
