@@ -75,6 +75,7 @@
         <v-card-text>
           {{ $t("addProductMessage") }}
           <v-text-field
+            autofocus
             :label="$t('productLabel')"
             v-model="newProduct"
           ></v-text-field>
@@ -98,7 +99,14 @@
         <v-card-text>
           {{ $t("deleteProductMessage") }}
           <br />
-          {{ selectedProduct }}
+          <br />
+          <h3 class="pl-6">
+            {{
+              selectedProduct && selectedProduct.includes(";")
+                ? selectedProduct.split(";")[1]
+                : selectedProduct
+            }}
+          </h3>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -189,6 +197,9 @@ export default {
             })
             .catch(function(error) {
               console.log("Error adding product:", error);
+            })
+            .finally(() => {
+              this.newProduct = "";
             });
         } else {
           const subProductRef = productsRef.doc(this.selectedProduct);
@@ -207,6 +218,9 @@ export default {
               })
               .catch(function(error) {
                 console.log("Error adding subproduct:", error);
+              })
+              .finally(() => {
+                this.newProduct = "";
               });
           });
         }
