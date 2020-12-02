@@ -47,8 +47,5 @@
   "addProductMessage": "Agrega el nombre del nuevo producto a ofrecer",
   "productLabel": "Producto",
   "deleteProductTitle": "Borrar producto",
-  "deleteProductMessage": "Estas seguro que quieres borrar este producto?",
-  "addSubproductTitle": "Agregar subproducto",
-  "addSubproductMessage": "Nombre de subproducto",
-  "subproductLabel": "Subproducto"
+  "deleteProductMessage": "Estas seguro que quieres borrar este producto?"
 }
