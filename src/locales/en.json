@@ -40,5 +40,11 @@
   "adminMenuLabel": "Admin",
   "homeMenuLabel": "Home",
   "orderNowMenuLabel": "Order now!",
-  "aboutUsMenuLabel": "About us"
+  "aboutUsMenuLabel": "About us",
+  "productsListTitle": "List of products available",
+  "addProductTitle": "New product",
+  "addProductMessage": "Add name of the new product to offer",
+  "productLabel": "Product",
+  "deleteProductTitle": "Delete product",
+  "deleteProductMessage": "Are you sure you wanna delete this product?"
 }

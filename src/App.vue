@@ -53,7 +53,7 @@
           <v-list-item 
             v-else
             link
-            @click="onMenuItemClick('secure')"
+            @click="onMenuItemClick('admin')"
           > 
             <v-list-item-icon>
               <v-icon>mdi-chef-hat</v-icon>

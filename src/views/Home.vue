@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <v-card id="home" class="mx-auto mt-2" max-width="600" height="500" color="#FFECC8">
+     <v-card id="home" class="mx-auto mt-2" max-width="600" height="500" color="#FFFFFF">
       <v-card-text class="pb-4">
         <v-img
         height="250"
@@ -20,7 +20,7 @@
         </div>
       </v-card-text>
     </v-card>
-    <v-card id="order-now" class="mx-auto mt-2" max-width="600" color="#FFECC8">
+    <v-card id="order-now" class="mx-auto mt-2" max-width="600" color="#FFFFFF">
       <v-card-title> {{$t("orderNowTitle")}} </v-card-title>
       <div class="d-flex" v-for="(filling, index) in fillings" :key="index">
         <v-card-text>{{ filling.name }}</v-card-text>
@@ -46,7 +46,7 @@
         >
       </v-card-actions>
     </v-card>
-     <v-card id="about-us" class="mx-auto mt-2" max-width="600" height="400" color="#FFECC8"> 
+     <v-card id="about-us" class="mx-auto mt-2" max-width="600" height="400" color="#FFFFFF"> 
        <v-card-text>
         <br/>
         {{$t("aboutUsTitle")}}
