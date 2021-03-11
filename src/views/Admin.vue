@@ -6,7 +6,7 @@
     <v-card
       id="products"
       class="mx-auto mt-2"
-      v-for="(product, index) in products"
+      v-for="(product, index) in Object.keys(products)"
       :key="index"
       max-width="700"
       color="#FFFFFF"
@@ -17,7 +17,6 @@
           <v-btn
             icon
             @click="
-              isProduct = false;
               displayDialog(addDialog, product);
             "
             ><v-icon>mdi-plus</v-icon></v-btn
@@ -25,7 +24,6 @@
           <v-btn
             icon
             @click="
-              isProduct = true;
               displayDialog(deleteDialog, product);
             "
             ><v-icon>mdi-trash-can</v-icon></v-btn
@@ -34,7 +32,7 @@
       </div>
 
       <div
-        v-for="(subproduct, i) in subproducts[index].subproducts"
+        v-for="(subproduct, i) in Object.values(products)[index].split(',')"
         :key="i"
         link
         style="padding-left: 30px;padding-right: 100px;"
@@ -44,7 +42,6 @@
             style="top: 10px;"
             icon
             @click="
-              isProduct = false;
               displayDialog(deleteDialog, product + ';' + subproduct);
             "
             ><v-icon>mdi-trash-can</v-icon></v-btn
@@ -55,13 +52,13 @@
     </v-card>
     <v-btn
       color="primary"
+      class="mb-6"
       dark
       absolute
       bottom
       right
       fab
       @click="
-        isProduct = true;
         displayDialog(addDialog);
       "
     >
@@ -123,15 +120,19 @@
 </template>
 
 <script>
-import { db } from "../components/firebaseInit";
-var isEmpty = require("lodash.isempty");
+
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: "Admin",
+  computed: mapState({
+    products: state => state.products.products
+  }),
+  created () {
+    this.$store.dispatch('products/getProducts');
+  },
   data() {
     return {
-      products: [],
-      subproducts: [],
       selectedProduct: "",
       showAddDialog: false,
       showDeleteDialog: false,
@@ -142,92 +143,9 @@ export default {
     };
   },
   methods: {
-    async deleteProduct() {
-      const productsRef = db.collection("products");
-      if (this.isProduct) {
-        const selectedProductRef = productsRef.doc(this.selectedProduct);
-        const subproducts = await selectedProductRef.get();
-
-        if (!isEmpty(subproducts)) {
-          console.log("deleted subproducts");
-          selectedProductRef.set({});
-        }
-        selectedProductRef
-          .delete()
-          .then(() => {
-            console.log("product deleted");
-            this.closeDialog(this.deleteDialog);
-          })
-          .catch(function(error) {
-            console.log("Error deleting product:", error);
-          });
-      } else {
-        const prods = this.selectedProduct.split(";");
-        const selectedProductRef = productsRef.doc(prods[0]);
-
-        selectedProductRef.get().then((doc) => {
-          const subproducts = doc.data();
-          const newSubproducts = doc
-            .data()
-            .subproducts.filter((item) => item != prods[1]);
-          selectedProductRef
-            .set({
-              subproducts: newSubproducts,
-            })
-            .then(() => {
-              console.log("subproduct deleted");
-              this.closeDialog(this.deleteDialog);
-            })
-            .catch(function(error) {
-              console.log("Error deleting subproduct:", error);
-            });
-        });
-      }
-    },
-    addProduct() {
-      if (this.newProduct != "") {
-        const productsRef = db.collection("products");
-        if (this.isProduct) {
-          productsRef
-            .doc(this.newProduct)
-            .set({})
-            .then(() => {
-              console.log("product added");
-              this.closeDialog(this.addDialog);
-            })
-            .catch(function(error) {
-              console.log("Error adding product:", error);
-            })
-            .finally(() => {
-              this.newProduct = "";
-            });
-        } else {
-          const subProductRef = productsRef.doc(this.selectedProduct);
-          const products = subProductRef.get().then((doc) => {
-            let subproducts = doc.data();
-            if (!isEmpty(subproducts)) {
-              subproducts.subproducts.push(this.newProduct);
-            } else {
-              subproducts = { subproducts: [this.newProduct] };
-            }
-            subProductRef
-              .set(subproducts)
-              .then(() => {
-                console.log("subproduct added");
-                this.closeDialog(this.addDialog);
-              })
-              .catch(function(error) {
-                console.log("Error adding subproduct:", error);
-              })
-              .finally(() => {
-                this.newProduct = "";
-              });
-          });
-        }
-      }
-    },
     displayDialog(type, product) {
       this.selectedProduct = product;
+      this.isProduct = !product;
       switch (type) {
         case this.deleteDialog:
           this.showDeleteDialog = true;
@@ -251,20 +169,12 @@ export default {
           break;
       }
     },
-  },
-  created() {
-    return {
-      fetchProducts: db.collection("products").onSnapshot((snapshot) => {
-        const tempProducts = [];
-        const tempSubproducts = [];
-        snapshot.forEach((doc) => {
-          tempProducts.push(doc.id);
-          tempSubproducts.push(doc.data());
-        });
-        this.products = tempProducts;
-        this.subproducts = tempSubproducts;
-      }),
-    };
-  },
+    addProduct(){
+      this.$store.dispatch('products/addProduct', {isProduct: this.isProduct, newProduct: this.newProduct, selectedProduct: this.selectedProduct}).then(this.closeDialog(this.addDialog));
+    },
+    deleteProduct(){
+
+    }
+  }
 };
 </script>

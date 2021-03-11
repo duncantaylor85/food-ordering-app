@@ -33,11 +33,26 @@
         </v-card-actions>
       </v-form>
     </v-card>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ errorMessage }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="yellow"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
-import { auth } from "../components/firebaseInit";
 
 export default {
   name: "Login",
@@ -49,19 +64,13 @@ export default {
       },
       show: false,
       error: null,
+      snackbar: false,
+      errorMessage: "",
     };
   },
   methods: {
     login() {
-        auth
-        .signInWithEmailAndPassword(this.input.email, this.input.password)
-        .then((data) => {
-          this.$router.replace({ name: "admin" });
-        })
-        .catch((err) => {
-          this.error = err.message;
-          console.log(this.error);
-        });
+        this.$store.dispatch("user/getToken", { email: this.input.email, password: this.input.password }).then(()=> this.$router.push('admin'));
     },
   },
 };

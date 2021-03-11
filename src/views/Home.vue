@@ -53,14 +53,11 @@
         <br/>
         <br/>
         {{$t("aboutUsDescription")}}
+        <br/>
+        {{$t("aboutUsDescription2")}}
+        <br/>
+        {{$t("aboutUsDescription3")}}
        </v-card-text>
-       <v-card-text class="pb-4">
-        <v-img
-        height="250"
-        contain
-        src="@/assets/cerro.png"
-        ></v-img>
-      </v-card-text>   
     </v-card>
     <ConfirmationDialog
       :dialog="confirmData.dialog"
