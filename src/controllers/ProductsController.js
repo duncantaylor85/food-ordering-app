@@ -1,8 +1,6 @@
-import { productsCollection } from "../components/firebaseInit";
 
-const products = new Map();
+import store from '../store/index';
 
-/*
 const deleteProduct = async (isProduct, selectedProduct) => {
     if (isProduct) {
         const selectedProductRef = productsCollection.doc(selectedProduct);
@@ -86,14 +84,11 @@ const addProduct = (isProduct, newProduct, selectedProduct) => {
         }
       }
     }
-*/
-const fetchProducts = () => {
-    productsCollection.onSnapshot((snapshot) => {
-        snapshot.forEach((doc) => {
-            this.products.set(doc.id, doc.data());
-            this.$emit("update-products", this.products);
-        });
-    });
+
+const fetchProducts = async function () {
+   return await store.dispatch("products/fetchProducts");
 }
 
-export  {products, fetchProducts};
+
+
+export  {fetchProducts, addProduct, deleteProduct};
