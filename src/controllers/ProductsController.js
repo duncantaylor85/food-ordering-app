@@ -1,4 +1,4 @@
-
+import { mapState } from 'vuex';
 import store from '../store/index';
 
 const deleteProduct = async (isProduct, selectedProduct) => {
@@ -86,9 +86,14 @@ const addProduct = (isProduct, newProduct, selectedProduct) => {
     }
 
 const fetchProducts = async function () {
-   return await store.dispatch("products/fetchProducts");
+  console.log("fetch");
+   return await store.dispatch("products/getProducts");
 }
 
+const getProducts = async function () {
+  console.log("get");
+  return await store.products.products;
+  
+}
 
-
-export  {fetchProducts, addProduct, deleteProduct};
+export  {fetchProducts, getProducts, addProduct, deleteProduct};
