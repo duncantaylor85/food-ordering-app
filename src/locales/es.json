@@ -45,8 +45,11 @@
   "aboutUsMenuLabel": "Sobre nosotros",
   "productsListTitle": "Lista de productos disponibles",
   "addProductTitle": "Nuevo producto",
+  "addSubproductTitle": "Nuevo subproducto",
   "addProductMessage": "Agrega el nombre del nuevo producto a ofrecer",
+  "addSubproductMessage": "Agrega el nombre del nuevo subproducto a ofrecer",
   "productLabel": "Producto",
+  "subproductLabel": "Subproducto",
   "deleteProductTitle": "Borrar producto",
   "deleteProductMessage": "Estas seguro que quieres borrar este producto?"
 }

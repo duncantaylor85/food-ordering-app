@@ -67,13 +67,13 @@
     <v-dialog v-model="showAddDialog" width="600">
       <v-card>
         <v-card-title>
-          {{ $t("addProductTitle") }}
+         {{isProduct ? $t("addProductTitle") : $t("addSubproductTitle")}}
         </v-card-title>
         <v-card-text>
-          {{ $t("addProductMessage") }}
+          {{ isProduct ? $t("addProductMessage") : $t("addSubproductMessage") }}
           <v-text-field
             autofocus
-            :label="$t('productLabel')"
+            :label="isProduct ? $t('productLabel') : $t('subproductLabel')"
             v-model="newProduct"
           ></v-text-field>
         </v-card-text>
@@ -121,15 +121,13 @@
 
 <script>
 
-import { mapState, mapActions } from 'vuex'
+import {fetchProducts, getProducts} from '@/controllers/ProductsController.js';
 
 export default {
   name: "Admin",
-  computed: mapState({
-    products: state => state.products.products
-  }),
+  computed: {products: getProducts()},
   created () {
-    this.$store.dispatch('products/getProducts');
+    this.products = fetchProducts();
   },
   data() {
     return {
@@ -140,6 +138,7 @@ export default {
       addDialog: "addDialog",
       newProduct: "",
       isProduct: false,
+      products: []
     };
   },
   methods: {
@@ -170,6 +169,7 @@ export default {
       }
     },
     addProduct(){
+      
       this.$store.dispatch('products/addProduct', {isProduct: this.isProduct, newProduct: this.newProduct, selectedProduct: this.selectedProduct}).then(this.closeDialog(this.addDialog));
     },
     deleteProduct(){
