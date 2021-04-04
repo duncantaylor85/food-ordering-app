@@ -73,7 +73,6 @@ const  state = () => ({
     deleteProduct({commit}, payload){
       const isProduct = payload.isProduct; 
       const selectedProduct = payload.selectedProduct;
-      console.log("payload", payload)
       if (isProduct) {
         const selectedProductRef = productsCollection.doc(selectedProduct);
         const subproducts = selectedProductRef.get();
@@ -95,11 +94,8 @@ const  state = () => ({
         const selectedProductRef = productsCollection.doc(prods[0]);
 
         selectedProductRef.get().then((doc) => {
-          console.log("store",doc.data())
           const subproducts = doc.data();
-          delete subproducts.subproducts[prods[1]]
-          console.log("store after delete", subproducts);
-        
+          delete subproducts.subproducts[prods[1]]        
           selectedProductRef.
             set(subproducts)
             .then(() => {
