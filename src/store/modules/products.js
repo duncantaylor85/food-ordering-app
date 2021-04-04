@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import isEmpty from "lodash.isempty";
 import { productsCollection } from "../../components/firebaseInit";
+import { deleteProduct } from "../../controllers/ProductsController";
 
 Vue.use(Vuex);
 
@@ -18,23 +19,20 @@ const  state = () => ({
   const mutations = {
     SET_PRODUCTS(state, products){
       const productsArray = products.split(";");
-      Vue.set(state.products, productsArray[0], productsArray[1]);
+      Vue.set(state.products, productsArray[0], JSON.parse(productsArray[1]));
     }
   }
 
   const actions = {
-    getProducts({ commit }){
+    fetchProducts({ commit }){
       productsCollection.onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
-            commit('SET_PRODUCTS', doc.id + ";" + doc.data().subproducts)
-  
+            commit('SET_PRODUCTS', doc.id + ";" + JSON.stringify(doc.data()))
         });
-    });
-
-    },
-    addProduct ({ state, commit }, payload) {
-      // TODO: commit state
-      console.log("mapAction add product", payload);
+      });
+    
+   },
+   addProduct ({commit}, payload) {
       const isProduct = payload.isProduct; 
       const newProduct = payload.newProduct;
       const selectedProduct = payload.selectedProduct;
@@ -43,7 +41,7 @@ const  state = () => ({
         if (isProduct) {
           productsCollection
             .doc(newProduct)
-            .set({})
+            .set({subproducts: {}, price: 0})
             .then(() => {
               console.log("product added");
             })
@@ -55,7 +53,7 @@ const  state = () => ({
           subProductRef.get().then((doc) => {
             let subproducts = doc.data();
             if (!isEmpty(subproducts)) {
-              subproducts.subproducts.push(newProduct);
+              subproducts.subproducts[newProduct] = {price: 0, description: ""};
             } else {
               subproducts = { subproducts: [newProduct] };
             }
@@ -70,8 +68,49 @@ const  state = () => ({
           });
         }
       }
-    }
+    },
 
+    deleteProduct({commit}, payload){
+      const isProduct = payload.isProduct; 
+      const selectedProduct = payload.selectedProduct;
+      console.log("payload", payload)
+      if (isProduct) {
+        const selectedProductRef = productsCollection.doc(selectedProduct);
+        const subproducts = selectedProductRef.get();
+
+        if (!isEmpty(subproducts)) {
+          selectedProductRef.set({});
+          console.log("deleted subproducts");
+        }
+        selectedProductRef
+          .delete()
+          .then(() => {
+            console.log("product deleted");
+          })
+          .catch(function(error) {
+            console.log("Error deleting product:", error);
+          });
+      } else {
+        const prods = selectedProduct.split(";");
+        const selectedProductRef = productsCollection.doc(prods[0]);
+
+        selectedProductRef.get().then((doc) => {
+          console.log("store",doc.data())
+          const subproducts = doc.data();
+          delete subproducts.subproducts[prods[1]]
+          console.log("store after delete", subproducts);
+        
+          selectedProductRef.
+            set(subproducts)
+            .then(() => {
+              console.log("subproduct deleted");
+            })
+            .catch(function(error) {
+              console.log("Error deleting subproduct:", error);
+            });
+        });
+      }
+    }
   }
   
 export default {

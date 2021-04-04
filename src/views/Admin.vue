@@ -17,14 +17,14 @@
           <v-btn
             icon
             @click="
-              displayDialog(addDialog, product);
+              displayDialog(addDialog, product, false);
             "
             ><v-icon>mdi-plus</v-icon></v-btn
           >
           <v-btn
             icon
             @click="
-              displayDialog(deleteDialog, product);
+              displayDialog(deleteDialog, product, true);
             "
             ><v-icon>mdi-trash-can</v-icon></v-btn
           >
@@ -32,7 +32,7 @@
       </div>
 
       <div
-        v-for="(subproduct, i) in Object.values(products)[index].split(',')"
+        v-for="(subproduct, i) in Object.keys(products[product].subproducts)"
         :key="i"
         link
         style="padding-left: 30px;padding-right: 100px;"
@@ -42,7 +42,7 @@
             style="top: 10px;"
             icon
             @click="
-              displayDialog(deleteDialog, product + ';' + subproduct);
+              displayDialog(deleteDialog, product + ';' + subproduct, false);
             "
             ><v-icon>mdi-trash-can</v-icon></v-btn
           >
@@ -59,7 +59,7 @@
       right
       fab
       @click="
-        displayDialog(addDialog);
+        displayDialog(addDialog, undefined, true);
       "
     >
       <v-icon>mdi-plus</v-icon>
@@ -82,7 +82,7 @@
           <v-btn color="blue darken-1" text @click="closeDialog(addDialog)">
             {{ $t("cancelButtonLabel") }}
           </v-btn>
-          <v-btn color="primary" text @click="addProduct">
+          <v-btn color="primary" text @click="addProductHandler">
             {{ $t("confirmButtonLabel") }}
           </v-btn>
         </v-card-actions>
@@ -110,7 +110,7 @@
           <v-btn color="blue darken-1" text @click="closeDialog(deleteDialog)">
             {{ $t("cancelButtonLabel") }}
           </v-btn>
-          <v-btn color="primary" text @click="deleteProduct">
+          <v-btn color="primary" text @click="deleteProductHandler">
             {{ $t("confirmButtonLabel") }}
           </v-btn>
         </v-card-actions>
@@ -121,13 +121,13 @@
 
 <script>
 
-import {fetchProducts, getProducts} from '@/controllers/ProductsController.js';
+import {fetchProducts, getProducts, addProduct, deleteProduct} from '@/controllers/ProductsController.js';
+import products from '../store/modules/products';
 
 export default {
   name: "Admin",
-  computed: {products: getProducts()},
   created () {
-    this.products = fetchProducts();
+    fetchProducts().then(this.products = getProducts());
   },
   data() {
     return {
@@ -137,14 +137,16 @@ export default {
       deleteDialog: "deleteDialog",
       addDialog: "addDialog",
       newProduct: "",
-      isProduct: false,
-      products: []
+      isProduct: false, 
+      products: {}     
     };
   },
   methods: {
-    displayDialog(type, product) {
+    displayDialog(type, product, isProduct) {
+      console.log("displayDialog", type, product);
       this.selectedProduct = product;
-      this.isProduct = !product;
+      this.isProduct = isProduct
+      console.log("ispProduct", this.isProduct)
       switch (type) {
         case this.deleteDialog:
           this.showDeleteDialog = true;
@@ -157,6 +159,7 @@ export default {
       }
     },
     closeDialog(type) {
+      this.newProduct = "";
       switch (type) {
         case this.deleteDialog:
           this.showDeleteDialog = false;
@@ -168,12 +171,11 @@ export default {
           break;
       }
     },
-    addProduct(){
-      
-      this.$store.dispatch('products/addProduct', {isProduct: this.isProduct, newProduct: this.newProduct, selectedProduct: this.selectedProduct}).then(this.closeDialog(this.addDialog));
+    addProductHandler(){
+      addProduct(this.isProduct, this.newProduct, this.selectedProduct).then(this.closeDialog(this.addDialog));
     },
-    deleteProduct(){
-
+    deleteProductHandler(){
+      deleteProduct(this.isProduct, this.selectedProduct).then(this.closeDialog(this.deleteDialog));
     }
   }
 };
