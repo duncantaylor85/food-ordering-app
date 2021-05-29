@@ -1,22 +1,18 @@
 <template>
   <div class="home">
-     <v-card id="home" class="mx-auto mt-2" max-width="600" height="500" color="#FFFFFF">
-      <v-card-text class="pb-4">
-        <v-img
-        height="250"
-        contain
-        src="@/assets/paila.png"
-        ></v-img>
-      </v-card-text>   
+     <v-card id="home" class="mx-auto mt-2" max-width="100%" height="500" color="#FFFFFF"> 
       <v-card-text>
-        <v-divider class="mx-4"></v-divider>
         <div class="my-4 subtitle-1">
-          {{$t("homeTitle")}}
+          {{$t("aboutUsTitle")}}
         </div>
-        <div>{{$t("homeDescription")}}
-         <br> 
-         <br>
-         {{$t("homeDescription2")}}  
+        <div>
+        
+        <br/>
+        {{$t("aboutUsDescription")}}
+        <br/>
+        {{$t("aboutUsDescription2")}}
+        <br/>
+        {{$t("aboutUsDescription3")}}
         </div>
       </v-card-text>
     </v-card>
@@ -46,19 +42,7 @@
         >
       </v-card-actions>
     </v-card>
-     <v-card id="about-us" class="mx-auto mt-2" max-width="600" height="400" color="#FFFFFF"> 
-       <v-card-text>
-        <br/>
-        {{$t("aboutUsTitle")}}
-        <br/>
-        <br/>
-        {{$t("aboutUsDescription")}}
-        <br/>
-        {{$t("aboutUsDescription2")}}
-        <br/>
-        {{$t("aboutUsDescription3")}}
-       </v-card-text>
-    </v-card>
+    
     <ConfirmationDialog
       :dialog="confirmData.dialog"
       :customer="customer"

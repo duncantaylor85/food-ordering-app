@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
-      <v-navigation-drawer app v-model="drawer" color="#FFAC00">
+      <v-navigation-drawer app v-model="drawer" color="#FFFFFF">
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="title">
@@ -56,10 +56,25 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app color="#FFAC00">
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar app color="#FFFFFF">
+        <v-app-bar-nav-icon
+          @click="drawer = !drawer"
+          class="hidden-sm-and-up"
+        ></v-app-bar-nav-icon>
         <v-toolbar-title>{{ $t("commonAppTitle") }}</v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-xs-only">
+          <v-btn
+            text
+            v-for="item in items"
+            :key="item.title"
+            link
+            v-scroll-to="item.scrollto"
+            @click.stop="onMenuItemClick(item.scrollto)"
+          >
+            {{ item.title }}
+          </v-btn>
+        </v-toolbar-items>
         <router-link
           v-if="user.loggedIn"
           to="/login"
@@ -69,7 +84,30 @@
         >
         <LocaleChanger />
       </v-app-bar>
-
+      <v-parallax dark src="@/assets/test.png">
+        <v-layout
+          white--text
+          align-center
+          column
+          justify-center
+          style="margin-top: 8.5em;"
+        >
+          <img src="@/assets/logowhite.png" height="150" />
+          <h4 class="subheading">De la Paila a tu Mesa!</h4>
+          <v-flex row wrap text-xs-center>
+            <v-btn
+              dark
+              large
+              color="red lighten-2"
+              class="mt-4 elevation-0"
+              v-scroll-to="'#order-now'"
+              @click.stop="onMenuItemClick('#order-now')"
+            >
+              {{ $t("orderNowTitle") }}
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-parallax>
       <!-- Sizes your content based upon application components -->
       <v-main>
         <!-- Provides the application the proper gutter -->
@@ -81,7 +119,6 @@
     </v-app>
   </div>
 </template>
-
 <script>
 import Vue from "vue";
 import { mapGetters } from "vuex";
@@ -122,31 +159,34 @@ export default Vue.extend({
     theme() {
       return "light";
     },
-    ...mapGetters('user', {
-      user: 'user'
-    })
-
+    ...mapGetters("user", {
+      user: "user",
+    }),
   },
 
   methods: {
     logout() {
-      auth.signOut().then(function() {
-        // Sign-out successful.
-        console.log("loggout out");
-      }).catch(function(error) {
-        // An error happened.
-        console.log("error logout", error);
-      });
+      auth
+        .signOut()
+        .then(function() {
+          // Sign-out successful.
+          console.log("loggout out");
+        })
+        .catch(function(error) {
+          // An error happened.
+          console.log("error logout", error);
+        });
     },
     onMenuItemClick(menu) {
       if (menu == "login") {
         this.$router.push(menu).catch(() => {});
-      }
-      if (menu != "login") {
+      } else {
         this.$router.push("/" + menu).catch(() => {});
       }
 
-      this.drawer = !this.drawer;
+      if (this.drawer) {
+        this.drawer = !this.drawer;
+      }
     },
   },
   watch: {

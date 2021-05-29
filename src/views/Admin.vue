@@ -143,10 +143,8 @@ export default {
   },
   methods: {
     displayDialog(type, product, isProduct) {
-      console.log("displayDialog", type, product);
       this.selectedProduct = product;
       this.isProduct = isProduct
-      console.log("ispProduct", this.isProduct)
       switch (type) {
         case this.deleteDialog:
           this.showDeleteDialog = true;

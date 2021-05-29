@@ -20,6 +20,9 @@ const  state = () => ({
     SET_PRODUCTS(state, products){
       const productsArray = products.split(";");
       Vue.set(state.products, productsArray[0], JSON.parse(productsArray[1]));
+    },
+    DELETE_PRODUCT(state, product){
+      delete products[product];   
     }
   }
 
@@ -75,15 +78,11 @@ const  state = () => ({
       const selectedProduct = payload.selectedProduct;
       if (isProduct) {
         const selectedProductRef = productsCollection.doc(selectedProduct);
-        const subproducts = selectedProductRef.get();
-
-        if (!isEmpty(subproducts)) {
-          selectedProductRef.set({});
-          console.log("deleted subproducts");
-        }
+        selectedProductRef.set({subproducts: {}})        
         selectedProductRef
           .delete()
           .then(() => {
+            commit("DELETE_PRODUCT", selectedProduct);
             console.log("product deleted");
           })
           .catch(function(error) {
